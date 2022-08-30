@@ -1,10 +1,11 @@
 {
-  "name": "olxiitbbs",
+  "name": "collegebazzar",
   "version": "1.0.0",
   "description": "App for the residents of IITBBS to buy and sell their commodities",
   "main": "index.js",
   "scripts": {
-    "test": "node start"
+    "test": "node start",
+    "start":"node index.js"
   },
   "author": "Abhay (20me02040)",
   "license": "ISC",
