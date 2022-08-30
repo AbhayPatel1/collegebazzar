@@ -94,7 +94,7 @@ router.get('/admin',async (req,res)=>{
   const products = await product.find({});
    res.render('profile',{products});
   }else{
-  res.redirect('/admin'+'?password=password');
+  res.redirect('/admin');
   //flash you dont have access
   }
 })
