@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+        
+        <script src="https://use.fontawesome.com/c560c025cf.js"></script>
+        
+    </head>
+
+    <body>
+
+        
+        <div class="container">
+           <div class="card shopping-cart">
+                    <div class="card-header bg-dark text-light">
+                        <i class="fa fa-admin" aria-hidden="true"></i>
+                        Admin
+                        <a href="/items" class="btn btn-outline-info btn-sm pull-right">Items</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="card-body">
+                            <!-- PRODUCT -->
+                            <% for(let product of products ) {%>
+                                <%   if(!product.isApproved){%>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-2 text-center">
+                                        <img class="img-responsive" src="<%=product.images[0].url%>" alt="prewiew" width="120" height="80">
+                                </div>
+                                <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                    <h4 class="product-name"><strong><%=product.name  %> </strong></h4>
+                                    <h4>
+                                        <small><%=product.price  %> </small>
+                                    </h4>
+                                    <h6><%=product.description%> </h6>
+
+                                </div>
+                               
+                                    <form action="/approve/<%=product._id %>" method="post">
+                                        <button type="submit" class="btn btn-success">Approve</button>
+                                    </form>
+                                    <form action="/delete/<%=product._id%>"  method="post">
+                                        <button type="submit" class="btn btn-danger">Delete  </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- END PRODUCT -->
+                           
+                            
+
+                        <% } %> 
+                        <% } %>
+                    </div>
+                    
+                </div>
+        </div>
+    </body>
+
+</html>
+
+
+  

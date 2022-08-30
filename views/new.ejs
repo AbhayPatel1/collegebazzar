@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create a new Product</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/new.css">
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="title">Add Item</div>
+            <form action="/items" method="post" enctype="multipart/form-data">
+              <div class="user__details">
+                <div class="input__box">
+                  <span class="details">Item name</span>
+                  <input type="text" placeholder="E.g: lamp" name="item[name]" required>
+                </div>
+                <div class="input__box">
+                  <span class="details">Price</span>
+                  <input type="number" placeholder="$5" name="item[price]" required>
+                </div>
+                <div class="input__box">
+                <span class="details">Upload Image</span>
+                <input type="file" name="avatar" />
+            </div>
+                <div class="input__box">
+                  <span class="details">Description</span>
+                  <input type="text" placeholder="Details relevant to item" name="item[description]" required>
+                </div>
+                
+          
+              </div>
+              <div class="gender__details">
+                <!-- <input type="radio" name="item[]"  id="dot-1">
+                <input type="radio" name="gender" id="dot-2">
+                <input type="radio" name="gender" id="dot-3">
+                <span class="gender__title">Category</span>
+                <div class="category">
+                  <label for="dot-1">
+                    <span class="dot one"></span>
+                    <span>Cycle</span>
+                  </label>
+                  <label for="dot-2">
+                    <span class="dot two"></span>
+                    <span>Book</span>
+                  </label>
+                  <label for="dot-3">
+                    <span class="dot three"></span>
+                    <span>Sports</span>
+                  </label>
+                </div> -->
+                <select class="form-select mt-3" required name="item[category]">
+                    <option selected disabled value="">Categories</option>
+                    <option value="cycle">cycle</option>
+                    <option value="books">books</option>
+                    <option value="light">light</option>
+                    <option value="others">others</option>
+
+                </select>
+              </div>
+              <br>
+              <label>* Your item will be added to the site once approved *</label>
+              <div class="button">
+                <input type="submit" value="Send for Aprroval">
+              </div>
+            </form>
+          </div>
+        
+
+    </body>
+
+</html>

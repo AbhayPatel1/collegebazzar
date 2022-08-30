@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Product</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Sublime project">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+        <link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="/lugins/OwlCarousel2-2.2.1/owl.carousel.css">
+        <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+        <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
+        <link rel="stylesheet" type="text/css" href="/styles/product.css">
+        <link rel="stylesheet" type="text/css" href="/styles/product_responsive.css">
+
+    </head>
+
+    <body>
+  
+        <div class="super_container">
+
+            <!-- Header -->
+           
+            <%- include('./partials/navc') %>
+
+            
+
+                <!-- Menu -->
+
+                <div class="menu menu_mm trans_300">
+                    <div class="menu_container menu_mm">
+                        <div class="page_menu_content">
+
+                            <div class="page_menu_search menu_mm">
+                                <form action="#">
+                                    <input type="search" required="required" class="page_menu_search_input menu_mm"
+                                        placeholder="Search for products...">
+                                </form>
+                            </div>
+                            <ul class="page_menu_nav menu_mm">
+                                <li class="page_menu_item has-children menu_mm">
+                                    <a href="index.html">Home<i class="fa fa-angle-down"></i></a>
+                                    <ul class="page_menu_selection menu_mm">
+                                        <li class="page_menu_item menu_mm"><a href="categories.html">Categories<i
+                                                    class="fa fa-angle-down"></i></a></li>
+                                        <li class="page_menu_item menu_mm"><a href="product.html">Product<i
+                                                    class="fa fa-angle-down"></i></a></li>
+                                        <li class="page_menu_item menu_mm"><a href="cart.html">Cart<i
+                                                    class="fa fa-angle-down"></i></a></li>
+                                        <li class="page_menu_item menu_mm"><a href="checkout.html">Checkout<i
+                                                    class="fa fa-angle-down"></i></a></li>
+                                        <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i
+                                                    class="fa fa-angle-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li class="page_menu_item has-children menu_mm">
+                                    <a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
+                                    <ul class="page_menu_selection menu_mm">
+                                        <li class="page_menu_item menu_mm"><a href="categories.html">Category<i
+                                                    class="fa fa-angle-down"></i></a></li>
+                                        <li class="page_menu_item menu_mm"><a href="categories.html">Category<i
+                                                    class="fa fa-angle-down"></i></a></li>
+                                        <li class="page_menu_item menu_mm"><a href="categories.html">Category<i
+                                                    class="fa fa-angle-down"></i></a></li>
+                                        <li class="page_menu_item menu_mm"><a href="categories.html">Category<i
+                                                    class="fa fa-angle-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li class="page_menu_item menu_mm"><a href="index.html">Accessories<i
+                                            class="fa fa-angle-down"></i></a></li>
+                                <li class="page_menu_item menu_mm"><a href="#">Offers<i
+                                            class="fa fa-angle-down"></i></a></li>
+                                <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i
+                                            class="fa fa-angle-down"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+
+
+                </div>
+
+                <!-- Home -->
+
+                <div class="home">
+
+                </div>
+
+                <!-- Product Details -->
+
+                <div class="product_details">
+                     <%- include('./partials/flash') %>
+
+                  
+                    <div class="container">
+                        <div class="row details_row">
+
+                            <!-- Product Image -->
+                            <div class="col-lg-6">
+                                <div class="details_image">
+
+                                    <div class="details_image_large"><img src="<%=singleproduct.images[0].url%> "
+                                            alt="">
+                                        <div class="product_extra product_new"><a href="categories.html">New</a></div>
+                                    </div>
+                                    <div
+                                        class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
+                                        <% for(let image of singleproduct.images) {%>
+                                            <% image++ %>
+                                                <% if(image.length>1) {%>
+                                                    <div class="details_image_thumbnail active"
+                                                        data-image="<%=image.url  %> "><img src="<%=image.url  %> "
+                                                            alt=""></div>
+                                                    <div class="details_image_thumbnail" data-image="<%=image.url  %>">
+                                                        <img src="<%=image.url%>" alt=""></div>
+                                                    <% } %>
+                                                        <% } %>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Content -->
+                            <div class="col-lg-6">
+                                <%- include('./partials/flash') %>
+                                <div class="details_content">
+                                    <div class="details_name">
+                                        <%=singleproduct.name %>
+                                    </div>
+
+                                    <div class="details_price">$<%=singleproduct.price %>
+                                    </div>
+
+
+                                    <div class="details_text">
+                                        Description
+                                        <p>
+                                            <%=singleproduct.description%>
+                                        </p>
+                                    </div>
+
+                                    <!-- Product Quantity -->
+                                    <div class="product_quantity_container">
+
+                                        <form action="/wishlist/<%=singleproduct._id%>" method="post">
+                                            <button class="button cart_button" type="submit"> Add/Remove from
+                                                Wishlist</button>
+                                        </form>
+                                    </div>
+
+                                    <!-- Share -->
+                                    <div class="details_share">
+                                        <span>Contact Owner:</span>
+                                        <ul>
+                                            <li>Email:Dummy Data </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Products -->
+
+
+
+                <!-- Newsletter -->
+
+
+
+                <!-- Footer -->
+
+                <div class="footer_overlay"></div>
+                <footer class="footer">
+                    <div class="footer_background" style="background-image:url(images/footer.jpg)"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div
+                                    class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
+                                    <div class="footer_logo"><a href="#">CollegeBazzar</a></div>
+                                    <div class="copyright ml-auto mr-auto">
+                                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                        Copyright &copy;
+                                        <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                                        This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by
+                                        <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    </div>
+                                    <div class="footer_social ml-lg-auto">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+        </div>
+        <script>const form = document.forms.order;
+
+            function handleSubmit(event) {
+                event.preventDefault();
+
+                const formData = new FormData(event.target);
+                const asString = new URLSearchParams(formData).toString();
+                console.log(asString);
+            }
+
+            form.addEventListener('submit', handleSubmit);</script>
+        <script src="/js/jquery-3.2.1.min.js"></script>
+        <script src="/styles/bootstrap4/popper.js"></script>
+        <script src="/styles/bootstrap4/bootstrap.min.js"></script>
+        <script src="/plugins/greensock/TweenMax.min.js"></script>
+        <script src="/plugins/greensock/TimelineMax.min.js"></script>
+        <script src="/plugins/scrollmagic/ScrollMagic.min.js"></script>
+        <script src="/plugins/greensock/animation.gsap.min.js"></script>
+        <script src="/plugins/greensock/ScrollToPlugin.min.js"></script>
+        <script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+        <script src="/plugins/Isotope/isotope.pkgd.min.js"></script>
+        <script src="/plugins/easing/easing.js"></script>
+        <script src="/plugins/parallax-js-master/parallax.min.js"></script>
+        <script src="/js/product.js"></script>
+    </body>
+
+</html>
