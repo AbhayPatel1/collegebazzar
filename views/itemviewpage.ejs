@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        <title>Product</title>
+        <title>Item</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Sublime project">
@@ -143,12 +143,24 @@
                                     </div>
 
                                     <!-- Product Quantity -->
-                                    <div class="product_quantity_container">
+                                    <div class="product_quantity_container" >
 
                                         <form action="/wishlist/<%=singleproduct._id%>" method="post">
                                             <button class="button cart_button" type="submit"> Add/Remove from
                                                 Wishlist</button>
                                         </form>
+                                        
+                                       
+                                        
+                                    </div>
+                                    <div class="product_quantity_container">
+
+                                        <form action="/delete/<%=singleproduct._id%>" onSubmit="return confirm('This cannot be undone, Are you sure you wish to delete?');" method="post" >
+                                            <button style="background-color:lightcoral ;"class="button cart_button" type="submit"> Delete the Product</button>
+                                        </form>
+                                        
+                                       
+                                        
                                     </div>
 
                                     <!-- Share -->
@@ -188,10 +200,8 @@
                                     <div class="footer_logo"><a href="#">CollegeBazzar</a></div>
                                     <div class="copyright ml-auto mr-auto">
                                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                        Copyright &copy;
-                                        <script>document.write(new Date().getFullYear());</script> All rights reserved |
-                                        This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by
-                                        <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                     
+                                       
                                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                     </div>
                                     <div class="footer_social ml-lg-auto">

@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
     },
     category:{
             type:String,
-            enum:['cycle','books','light','other'],
+            enum:['cycle','books','light','others'],
             required:true
         },
     isApproved:{

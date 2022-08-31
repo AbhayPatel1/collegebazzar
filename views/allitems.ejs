@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Approve</title>
+        <title>All Items</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
             id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -31,7 +31,6 @@
                     <a href="/allusers" class="btn btn-outline-info btn-sm pull-right">Users</a>
                     
 
-
                     <form action="/logoutadmin" style="display: inline;" method="post">
                         <button type="submit" class="btn btn-danger">Logout </button>
                     </form>
@@ -42,8 +41,8 @@
                     
 
             </div>
+            <%-include('./partials/flash')  %> 
             <% for(let product of products ) {%>
-                <%   if(!product.isApproved){%>
                 <div class="card-body">
                     <!-- PRODUCT -->
 
@@ -67,9 +66,7 @@
                             </h6>
 
                         </div>
-                        <form action="/approve/<%=product._id %>" method="post">
-                            <button type="submit" class="btn btn-success">Approve</button>
-                        </form>
+
 
                         <form action="/delete/<%=product._id%>" method="post">
                             <button type="submit" class="btn btn-danger">Delete </button>
@@ -77,12 +74,9 @@
                     </div>
                 </div>
                 <% } %> 
-                <% } %> 
         </div>
         
 
     </body>
 
 </html>
-
-  

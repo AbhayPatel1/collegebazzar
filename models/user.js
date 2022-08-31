@@ -11,6 +11,10 @@ const UserSchema = new Schema({
       required: [true, "email required"],
       unique: [true, "email already registered"],
     },
+    isBlacklisted:{
+      type:Boolean,
+      default:false
+    },
     firstName: String,
     lastName: String,
     profilePhoto: String,
