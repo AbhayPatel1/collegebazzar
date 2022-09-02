@@ -211,7 +211,7 @@ router.get('/user',ensureLoggedIn,async(req,res)=>{
   var founduser = await user.findOne({id:req.user.id})
   .populate('items')
   .exec();
-  console.log(founduser.items[0].images[0])
+
   res.render('user',{founduser  })
 })
 
