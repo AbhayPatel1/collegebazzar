@@ -154,11 +154,11 @@
                                         
                                     </div>
                                     <div class="product_quantity_container">
-
+                                        <% if(id==singleproduct.author){ %> 
                                         <form action="/delete/<%=singleproduct._id%>" onSubmit="return confirm('This cannot be undone, Are you sure you wish to delete?');" method="post" >
                                             <button style="background-color:lightcoral ;"class="button cart_button" type="submit"> Delete the Product</button>
                                         </form>
-                                        
+                                        <% } %> 
                                        
                                         
                                     </div>

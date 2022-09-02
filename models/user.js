@@ -24,6 +24,10 @@ const UserSchema = new Schema({
     wishlistedItems:[{
       type:Schema.ObjectId,
       ref:"product" 
+    }],
+    items:[{
+      type:Schema.ObjectId,
+      ref:"product"
     }]
     
   });

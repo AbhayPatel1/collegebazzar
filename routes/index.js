@@ -20,19 +20,7 @@ var ensureLoggedIn = ensureLogIn();
 
 var router = express.Router();
 
-const isAuthor = async (req, res, next) => {
-  if(!req.isadmin){
-  const { id } = req.params;
-  const findproduct = await product.findById(id);
 
-  if (!(findproduct.author==req.user.id)) {
-    req.flash('error', 'You are not the owner of item');
-    return res.redirect(`/items/${id}`)
-  }}else{
-    next();
-  }
-  next();
-}
 
 const isApproved = async(req,res,next)=>{
   const {id} = req.params;
@@ -109,12 +97,13 @@ router.get('/category/:id',async (req,res)=>{
   res.render('category',{foundproduct,id})
 })
 
+
 router.get('/items/:id', ensureLoggedIn,isApproved, async (req, res) => {
   const { id } = req.params;
   const singleproduct = await product.findById(id);
  
  // console.log(singleproduct);
-  res.render('itemviewpage', { singleproduct});
+  res.render('itemviewpage', { singleproduct,'id':req.user.id});
 })
 router.get('/allitems',async (req,res)=>{
   if(req.session.isadmin=='yes'){
@@ -168,17 +157,17 @@ router.post('/approve/:id',ensureLoggedIn,async(req,res)=>{
 
 router.post('/items', ensureLoggedIn,upload.array('avatar'), async (req, res) => {
   
-  const newitem = new product(req.body.item);
+ //adding product to product database/collection 
+  var newitem = new product(req.body.item);
   newitem.images = req.files.map(f=>({url:f.path,filename:f.filename}));
   newitem.author = req.user.id;
- 
-  await newitem.save();
-  //res.send("making your product");
+  await newitem.save(); 
 
+  //adding the product to user
+  foundproduct = await product.find().sort({_id:-1}).limit(1);
+
+  await user.updateOne({'id':req.user.id},{ $push: { 'items': foundproduct._id } });
   res.redirect('/items');
- // console.log(req.body,req.files);
-  
- 
 })
 
 router.get('/wishlist',ensureLoggedIn,async(req,res)=>{
@@ -190,6 +179,8 @@ router.get('/wishlist',ensureLoggedIn,async(req,res)=>{
     var products = founduser[0].wishlistedItems;
     res.render('wishlist',{products});
 })
+
+
 
 
 router.post('/wishlist/:id', ensureLoggedIn, async (req, res) => {
@@ -215,6 +206,15 @@ router.post('/wishlist/:id', ensureLoggedIn, async (req, res) => {
    res.redirect('/items/'+id);
 })
 
+router.get('/user',ensureLoggedIn,async(req,res)=>{
+
+  var founduser = await user.findOne({id:req.user.id})
+  .populate('items')
+  .exec();
+  console.log(founduser.items[0].images[0])
+  res.render('user',{founduser  })
+})
+
 
 //edit
 router.get('/items/edit/:id', ensureLoggedIn, async (req, res) => {
@@ -235,12 +235,33 @@ router.get('/', (req, res) => {
   res.render('index');
 })
 
+const isAuthor = async (req, res, next) => {
+  if(req.isadmin){
+  const { id } = req.params;
+  const findproduct = await product.findById(id);
+  next(); 
+
+ }
+ const { id } = req.params;
+ const findproduct = await product.findById(id);
+ if (!(findproduct.author==req.user.id)) {
+  //req.flash('error', 'You are not the owner of item');
+  res.send('you are not the owner')
+}
+  next();
+}
+
 router.post('/delete/:id', ensureLoggedIn, isAuthor,async (req, res) => {
   //IMPLEMENT IS AUTHOR
+
   const { id } = req.params;
   await product.findByIdAndDelete(id);
   req.flash('success','Deleted a Item')
+  if(req.query.uri=='admin'){
   res.redirect('/allitems');
+  }else{
+    res.redirect('/items')
+  }
 })
 
 
