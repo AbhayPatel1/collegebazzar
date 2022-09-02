@@ -86,7 +86,7 @@ router.get('/items/new', ensureLoggedIn, async (req, res) => {
   const founduser = await user.find({id:req.user.id});
   
   if(founduser[0].isBlacklisted){
-    return res.send('you are blaclisted from posting the item, contact admin');
+    return res.send('you are blacklisted from posting the item, contact admin');
   }else{
   res.render('new.ejs');}
 })
