@@ -169,8 +169,8 @@ router.post('/items', ensureLoggedIn,upload.array('avatar'), async (req, res) =>
   const newuser=await user.updateOne({'id':req.user.id},{ $push: { 'items': foundproduct[0]._id } });
   //console.log(newuser);
   const newuser2 = await user.find({'id':req.user.id})
-  console.log(newuser2)
-  res.send('done')
+  // console.log(newuser2)
+  res.redirect('/items');
 })
 
 router.get('/wishlist',ensureLoggedIn,async(req,res)=>{
@@ -217,7 +217,7 @@ router.get('/user',ensureLoggedIn,async(req,res)=>{
 
   console.log(founduser)
 
-  res.render('user',{founduser })
+  res.render('user',{founduser})
 })
 
 
