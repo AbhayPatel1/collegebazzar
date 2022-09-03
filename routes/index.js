@@ -117,7 +117,7 @@ router.get('/allitems',async (req,res)=>{
 router.get('/admin',async (req,res)=>{
   if(req.session.isadmin=='yes'){
     const products = await product.find({});
-   res.render('profile',{products});
+  return res.render('profile',{products});
   }
   res.render('admin');
 })
