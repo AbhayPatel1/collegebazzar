@@ -150,6 +150,7 @@ router.post('/logoutadmin',ensureLoggedIn,async(req,res)=>{
 router.post('/approve/:id',ensureLoggedIn,async(req,res)=>{
   const {id} = req.params;
   const singleproduct = await product.findByIdAndUpdate(id,{isApproved:true});
+  req.flash('success','Approved a item');
   res.redirect('/admin');
 })
 
@@ -212,6 +213,8 @@ router.get('/user',ensureLoggedIn,async(req,res)=>{
   .populate('items')
   .exec();
 
+  console.log(founduser)
+
   res.render('user',{founduser  })
 })
 
@@ -241,13 +244,14 @@ const isAuthor = async (req, res, next) => {
   const findproduct = await product.findById(id);
   next(); 
 
- }
+ }else{
  const { id } = req.params;
  const findproduct = await product.findById(id);
  if (!(findproduct.author==req.user.id)) {
   //req.flash('error', 'You are not the owner of item');
   res.send('you are not the owner')
 }
+ }
   next();
 }
 
@@ -259,7 +263,10 @@ router.post('/delete/:id', ensureLoggedIn, isAuthor,async (req, res) => {
   req.flash('success','Deleted a Item')
   if(req.query.uri=='admin'){
   res.redirect('/allitems');
-  }else{
+  }else if(req.query.uri='approve'){
+  res.redirect('/admin');    
+  }
+  else{
     res.redirect('/items')
   }
 })

@@ -42,11 +42,12 @@
                     
 
             </div>
+            <%-include('./partials/flash')  %> 
             <% for(let product of products ) {%>
                 <%   if(!product.isApproved){%>
                 <div class="card-body">
                     <!-- PRODUCT -->
-
+                    
 
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-2 text-center">
@@ -71,7 +72,7 @@
                             <button type="submit" class="btn btn-success">Approve</button>
                         </form>
 
-                        <form action="/delete/<%=product._id%>" method="post">
+                        <form action="/delete/<%=product._id%>?uri=approve" method="post">
                             <button type="submit" class="btn btn-danger">Delete </button>
                         </form>
                     </div>
