@@ -166,8 +166,7 @@ router.post('/items', ensureLoggedIn,upload.array('avatar'), async (req, res) =>
 
   //adding the product to user
   foundproduct = await product.find().sort({_id:-1}).limit(1);
-
-  await user.updateOne({'id':req.user.id},{ $push: { 'items': foundproduct._id } });
+  const newuser=await user.updateOne({'author':req.user.id},{ $push: { 'items': foundproduct[0]._id } });
   res.redirect('/items');
 })
 
