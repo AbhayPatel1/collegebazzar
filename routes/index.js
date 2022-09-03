@@ -249,7 +249,7 @@ const isAuthor = async (req, res, next) => {
  const findproduct = await product.findById(id);
  if (!(findproduct.author==req.user.id)) {
   //req.flash('error', 'You are not the owner of item');
-  res.send('you are not the owner')
+
 }
  }
   next();
