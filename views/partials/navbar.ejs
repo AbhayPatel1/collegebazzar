@@ -103,14 +103,22 @@
             </div>
             <ul class="page_menu_nav menu_mm">
                 <li class="page_menu_item has-children menu_mm">
-                    <a href="index.html">Home<i class="fa fa-angle-down"></i></a>
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="page_menu_item has-children menu_mm">
+                   <a href="">Categories<i class="fa fa-angle-down"></i></a>
                     <ul class="page_menu_selection menu_mm">
-                        <li class="page_menu_item menu_mm">Categories</a><i class="fa fa-angle-down"></i></li>
                         <li><a href="https://college-bazzar.herokuapp.com/category/cycle">Cycle</a></li>
                         <li><a href="https://college-bazzar.herokuapp.com/category/books">Books</a></li>
                         <li><a href="https://college-bazzar.herokuapp.com/category/light">light</a></li>
                         <li><a href="https://college-bazzar.herokuapp.com/category/others">Others</a></li>
                     </ul>
+                </li>
+                <li class="page_menu_item has-children menu_mm"><a href="/items/new">Add Item</a></li>
+                    <form action="/logout" method="post">
+                        <label for="btnlogout"><a href="/user"><%= products[1].user %></a></label>
+                        <button id="btnlogout" type="button submit" class="btn btn-danger">Logout</button>
+                    </form>
                 </li>
                 
                 
